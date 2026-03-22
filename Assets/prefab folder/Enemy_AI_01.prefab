@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 8942825430966299408}
   - component: {fileID: 2365477067091792104}
   - component: {fileID: 3641494271165765909}
+  - component: {fileID: 8743644326899886881}
   - component: {fileID: 4215246636748428876}
   - component: {fileID: 7134799284546791265}
-  - component: {fileID: 6118848923951772524}
   - component: {fileID: 1356883605719074304}
   m_Layer: 7
   m_Name: Enemy_AI_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500312500361302279}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.026685515, y: -0, z: -0, w: 0.9996439}
+  m_LocalRotation: {x: -0.026682895, y: 0, z: 0, w: 0.999644}
   m_LocalPosition: {x: -133.73, y: 142.36398, z: -31.509518}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1468265387631805647}
@@ -68,9 +68,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!65 &3641494271165765909
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,35 +92,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 16.232542, y: 4.6987057, z: 13.965731}
   m_Center: {x: 0, y: 1.4951091, z: 0.7097733}
---- !u!114 &4215246636748428876
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500312500361302279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ee6980e5918a674cb15954b641e5438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  explosionPrefab: {fileID: 0}
---- !u!114 &7134799284546791265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 500312500361302279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec1cf33342b8e11408d828c13f76ed17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  crashTorque: 40
-  crashForwardForce: 30
---- !u!114 &6118848923951772524
+--- !u!114 &8743644326899886881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,40 +105,73 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLeader: 0
-  cruiseSpeed: 130
-  boostSpeed: 160
-  turnSpeed: 3.2
-  maneuverTimeMin: 1
-  maneuverTimeMax: 2
+  cruiseSpeed: 55
+  boostSpeed: 72
+  turnSpeed: 1.3
+  maneuverTimeMin: 2
+  maneuverTimeMax: 4
+  bankAngle: 60
+  bankSpeed: 4
   fireRange: 650
-  fireRate: 0.12
+  fireRate: 0.2
   fireSpread: 0.08
   attackAngle: 25
-  bulletDamage: 20
-  critChance: 0.1
+  bulletSpeed: 900
+  bulletDamage: 1
+  critChance: 0.15
   critMultiplier: 2
   useDistanceFalloff: 1
   minDamageMultiplier: 0.5
   useAngleBonus: 1
   headOnBonusMultiplier: 1.5
   flybyDistance: 100
-  flybyBoostMultiplier: 1.2
-  rollSpeed: 200
-  minAltitude: 100
+  flybyBoostMultiplier: 3
+  rollSpeed: 250
+  minAltitude: 230
   formationPosition: {x: 0, y: 0, z: 0}
   maxPitchAngle: 45
   minChaseDistance: 80
-  tracerPrefab: {fileID: 0}
+  tracerPrefab: {fileID: 582338983789379642, guid: c35fd8fd312848347a37907f302a49d4, type: 3}
   firePoint: {fileID: 0}
-  detectionRadius: 300
+  detectionRadius: 200
   chaseDuration: 30
-  formationDuration: 10
+  formationDuration: 15
   regroupSpeedMultiplier: 2
-  separationDistance: 25
-  separationStrength: 2
+  separationDistance: 150
+  separationStrength: 1
   shootMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  gunSound: {fileID: 0}
+  flybySound: {fileID: 0}
+--- !u!114 &4215246636748428876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500312500361302279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ee6980e5918a674cb15954b641e5438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
+  explosionPrefab: {fileID: 850470726979995415, guid: 84edda799efd1254780a330dfbb9c8af, type: 3}
+--- !u!114 &7134799284546791265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500312500361302279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec1cf33342b8e11408d828c13f76ed17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crashTorque: 90
+  crashForwardForce: 50
 --- !u!114 &1356883605719074304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,15 +184,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c1f98b2d8e6694380e4462d20684f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoints: []
-  range: 1000
+  twoGunBarrels: []
+  fourGunBarrels: []
+  useFourGuns: 1
+  bulletPrefab: {fileID: 0}
+  bulletSpeed: 300
   fireRate: 10
-  damage: 10
-  linePrefab: {fileID: 0}
-  lineDuration: 0.05
   gunSmokeLeft: {fileID: 0}
   gunSmokeRight: {fileID: 0}
   gunSound: {fileID: 0}
+  ammoText: {fileID: 0}
 --- !u!1 &516542766276639491
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,7 +700,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75be95d6fa13dd4419aa47615a228a3b, type: 2}
+  - {fileID: 2100000, guid: 12aaa518bdc2e0a4ba06cbb783f21421, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1929,7 +1935,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75be95d6fa13dd4419aa47615a228a3b, type: 2}
+  - {fileID: 2100000, guid: 12aaa518bdc2e0a4ba06cbb783f21421, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2015,7 +2021,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75be95d6fa13dd4419aa47615a228a3b, type: 2}
+  - {fileID: 2100000, guid: 12aaa518bdc2e0a4ba06cbb783f21421, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2101,7 +2107,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 40064cc53514f5a488bc2e25a347c69b, type: 2}
+  - {fileID: 2100000, guid: 12aaa518bdc2e0a4ba06cbb783f21421, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3250,7 +3256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75be95d6fa13dd4419aa47615a228a3b, type: 2}
+  - {fileID: 2100000, guid: 12aaa518bdc2e0a4ba06cbb783f21421, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
