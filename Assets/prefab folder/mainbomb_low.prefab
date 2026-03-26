@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6903817887216373708}
   - component: {fileID: 5124498434418038649}
   - component: {fileID: 5056649422262656957}
+  - component: {fileID: 3933060545249137054}
   m_Layer: 9
   m_Name: mainbomb_low
   m_TagString: Untagged
@@ -96,7 +97,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8946409578694138096}
   serializedVersion: 4
-  m_Mass: 80
+  m_Mass: 150
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -136,3 +137,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.007519543, y: 0.007517933, z: 0.037981}
   m_Center: {x: -0.16745165, y: 0.037865326, z: 0.20752916}
+--- !u!114 &3933060545249137054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8946409578694138096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d0bdde3b0bdc2439a35bd982a67024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageRadius: 20
+  damage: 100
+  explosionPrefab: {fileID: 850470726979995415, guid: 84edda799efd1254780a330dfbb9c8af, type: 3}
+  lifeTime: 10

@@ -205,7 +205,7 @@ public class PhysicsPlaneController : MonoBehaviour
         engineSound = GetComponent<AudioSource>();
 
         rb.interpolation = RigidbodyInterpolation.Interpolate;
-        Application.targetFrameRate = 60;
+        //Application.targetFrameRate = -1;
 
         currentSpeed = maxSpeed * 0.4f;
     }

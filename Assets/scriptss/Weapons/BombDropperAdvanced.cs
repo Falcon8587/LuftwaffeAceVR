@@ -40,7 +40,7 @@ public class BombDropperAdvanced : MonoBehaviour
             StartCoroutine(DropSideBombs());
         }
     }
-    // 💣 BIG BOMB
+    //  BIG BOMB
     void DropBigBomb()
     {
         // Hide visual
@@ -61,7 +61,7 @@ public class BombDropperAdvanced : MonoBehaviour
         IgnorePlaneCollision(bomb);
         bigBombDropped = true;
     }
-    // 💣 LEFT / RIGHT SYSTEM
+    //  LEFT / RIGHT SYSTEM
     IEnumerator DropSideBombs()
     {
         isDropping = true;
@@ -89,7 +89,7 @@ public class BombDropperAdvanced : MonoBehaviour
             sidesDropped = 0;
         }
     }
-    // 💣 SINGLE BOMB DROP
+    //  SINGLE BOMB DROP
     IEnumerator DropBomb(int index)
     {
         Transform spawn = smallBombSpawns[index];
@@ -111,7 +111,7 @@ public class BombDropperAdvanced : MonoBehaviour
         IgnorePlaneCollision(bomb);
         yield return new WaitForSeconds(dropDelay);
     }
-    // 🚫 IGNORE COLLISION
+    //  IGNORE COLLISION
     void IgnorePlaneCollision(GameObject bomb)
     {
         Collider bombCol = bomb.GetComponent<Collider>();
@@ -120,7 +120,7 @@ public class BombDropperAdvanced : MonoBehaviour
             Physics.IgnoreCollision(bombCol, planeCol);
         }
     }
-    // 🔄 RELOAD
+    //  RELOAD
     IEnumerator ReloadBombs()
     {
         isReloading = true;

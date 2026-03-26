@@ -1,94 +1,86 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class JerichoSiren : MonoBehaviour
 {
-    public AudioSource siren;
+    [Header("Audio Source Setup")]
+    [SerializeField] GameObject sirenSourceObject;
 
-    [Header("Dive Settings")]
-    public float triggerAngle = 65f; // degrees
-    public float startDelay = 0.5f;
+    AudioSource sirenAudio;
+    Rigidbody rb;
 
-    [Header("Fade Settings")]
-    public float fadeSpeed = 2f;
+    [Header("Activation Settings")]
+    [SerializeField] float minDiveAngle = 70f; // easier to trigger for testing
+    [SerializeField] float minSpeed = 10f;
 
-    [Header("Tail Loop")]
-    public float loopDuration = 2f;
+    [Header("Audio Settings")]
+    [SerializeField] float minVolume = 0f;
+    [SerializeField] float maxVolume = 1f;
 
-    private float clipLength;
-    private float delayTimer = 0f;
+    [SerializeField] float minPitch = 0.8f;
+    [SerializeField] float maxPitch = 2.0f;
 
-    private bool isDiving = false;
-    private bool hasStarted = false;
+    [SerializeField] float fadeSpeed = 2f;
+
+    float currentVolume;
 
     void Start()
     {
-        if (siren.clip != null)
-            clipLength = siren.clip.length;
+        rb = GetComponent<Rigidbody>();
+
+        // Get AudioSource
+        if (sirenSourceObject != null)
+            sirenAudio = sirenSourceObject.GetComponent<AudioSource>();
+        else
+            sirenAudio = GetComponent<AudioSource>();
+
+        if (sirenAudio == null)
+        {
+            Debug.LogError("JerichoSiren: No AudioSource found!");
+            return;
+        }
+
+        sirenAudio.loop = true;
+        sirenAudio.playOnAwake = false;
+
+        Debug.Log("Jericho Siren initialized");
     }
 
     void Update()
     {
-        HandleDiveSiren();
-    }
+        if (sirenAudio == null) return;
 
-    void HandleDiveSiren()
-    {
+        float speed = rb.linearVelocity.magnitude;
         float diveAngle = Vector3.Angle(transform.forward, Vector3.down);
 
-        // Check if steep enough
-        if (diveAngle < triggerAngle)
-        {
-            isDiving = true;
-            delayTimer += Time.deltaTime;
+        Debug.Log($"Speed: {speed} | DiveAngle: {diveAngle}");
 
-            // Wait before starting
-            if (delayTimer >= startDelay)
-            {
-                if (!siren.isPlaying && !hasStarted)
-                {
-                    siren.Play();
-                    hasStarted = true;
-                }
-            }
+        bool isDiving = diveAngle < minDiveAngle && speed > minSpeed;
+
+        if (isDiving)
+        {
+            Debug.Log("DIVING - SIREN ACTIVE");
+
+            if (!sirenAudio.isPlaying)
+                sirenAudio.Play();
+
+            float speedFactor = Mathf.InverseLerp(minSpeed, 150f, speed);
+            float angleFactor = Mathf.InverseLerp(minDiveAngle, 0f, diveAngle);
+
+            float intensity = speedFactor * angleFactor;
+
+            currentVolume = Mathf.Lerp(currentVolume, intensity, Time.deltaTime * fadeSpeed);
+
+            sirenAudio.volume = Mathf.Lerp(minVolume, maxVolume, currentVolume);
+            sirenAudio.pitch = Mathf.Lerp(minPitch, maxPitch, speedFactor);
         }
         else
         {
-            // Not diving → reset delay
-            isDiving = false;
-            delayTimer = 0f;
-        }
+            currentVolume = Mathf.Lerp(currentVolume, 0f, Time.deltaTime * fadeSpeed);
+            sirenAudio.volume = currentVolume;
 
-        // Fade logic
-        if (isDiving && hasStarted)
-        {
-            // Fade IN
-            siren.volume = Mathf.Lerp(siren.volume, 1f, Time.deltaTime * fadeSpeed);
-
-            HandleTailLoop();
-        }
-        else
-        {
-            // Fade OUT
-            siren.volume = Mathf.Lerp(siren.volume, 0f, Time.deltaTime * fadeSpeed);
-
-            // Stop when silent
-            if (siren.volume < 0.05f && siren.isPlaying)
-            {
-                siren.Stop();
-                hasStarted = false;
-            }
-        }
-    }
-
-    void HandleTailLoop()
-    {
-        if (siren.clip == null) return;
-
-        float loopStart = clipLength - loopDuration;
-
-        if (siren.time >= loopStart)
-        {
-            siren.time = loopStart + 0.05f;
+            if (currentVolume < 0.01f && sirenAudio.isPlaying)
+                sirenAudio.Stop();
         }
     }
 }

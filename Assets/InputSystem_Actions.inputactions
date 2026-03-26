@@ -180,7 +180,7 @@
                 {
                     "name": "",
                     "id": "cd60f724-7076-4a29-a8ad-fc087bffb4e7",
-                    "path": "<HID::LiteStar Pc Flight Simulator>/button2",
+                    "path": "<HID::LiteStar Pc Flight Simulator>/button3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -202,7 +202,7 @@
                 {
                     "name": "",
                     "id": "20ec67f3-6449-496a-b753-b728fa5e0f5d",
-                    "path": "<HID::LiteStar Pc Flight Simulator>/hat/right",
+                    "path": "<HID::LiteStar Pc Flight Simulator>/button5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -224,7 +224,7 @@
                 {
                     "name": "",
                     "id": "4a727ad8-85ed-4d48-8825-06df4df7b81e",
-                    "path": "<HID::LiteStar Pc Flight Simulator>/hat/left",
+                    "path": "<HID::LiteStar Pc Flight Simulator>/button6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
