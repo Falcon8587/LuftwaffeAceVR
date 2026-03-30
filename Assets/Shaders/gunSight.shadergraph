@@ -646,7 +646,7 @@
         "opposite"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": false,
+    "m_PreviewExpanded": true,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -1024,13 +1024,13 @@
         "m_Id": "eecd21e01c3c4162a99333f0ac17aa28"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
-    "m_CastShadows": true,
+    "m_CastShadows": false,
     "m_ReceiveShadows": true,
     "m_DisableTint": false,
     "m_AdditionalMotionVectorMode": 0,
@@ -1791,7 +1791,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -705.0,
-            "y": 382.0,
+            "y": 383.0000305175781,
             "width": 130.0,
             "height": 118.0
         }
